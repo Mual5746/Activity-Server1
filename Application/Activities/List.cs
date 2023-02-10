@@ -6,7 +6,7 @@ using Persistence;
 
 namespace Application.Activities
 {
-    internal class List
+    public class List
     {
         public class Query : IRequest<List<Activity>> { };
 
