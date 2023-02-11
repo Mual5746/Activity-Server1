@@ -16,17 +16,34 @@ namespace Application.Activities
         public class Handler : IRequestHandler<Query, List<Activity>>
         {
             private readonly DataContext _context;
+            //private readonly ILogger<List> _logger;
 
             //We need access to our data context.If we want to return a list of activities, then we need
             //to get them from our database.  So we're going to inject our DB context or our data context into
             //here, but it's not going to be a public
-            public Handler(DataContext context) 
+            public Handler(DataContext context ) //, ILogger<List> logger) 
             {
                 _context = context;
+               // _logger = logger;
             }
 
-            public async Task<List<Activity>>Handle(Query request, CancellationToken token)
+            public async Task<List<Activity>>Handle(Query request, CancellationToken token) // in case to want to use cancelation
             {
+                /*
+                try
+                {
+                    for (var i = 0; i < 10; i++)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        await Task.Delay(1000, token);
+                        _logger.LogInformation($"Task {i} has been completed ");
+                    }
+
+                } catch(Exception ex)
+                {
+                    _logger.LogInformation($"Task was canceled {ex}" );
+
+                } */
                 return await _context.Activities.ToListAsync();
             }
             
