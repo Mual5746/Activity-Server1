@@ -1,19 +1,19 @@
-import { createBrowserRouter, RouteObject } from 'react-router-dom';
-import ActivityDashboard from '../../Features/activities/dashboard/ActivityDashboard';
-import ActivityDetails from '../../Features/activities/datails/ActivityDetails';
-import ActivityForm from '../../Features/activities/form/ActivityForm';
-import HomePage from '../../Features/home/HomePage';
-import App from '../layout/App';
+import { createBrowserRouter, RouteObject } from "react-router-dom";
+import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
+import ActivityDetails from "../../features/activities/details/ActivityDetails";
+import ActivityForm from "../../features/activities/form/ActivityForm";
+import HomePage from "../../features/home/HomePage";
+import App from "../layout/App";
 
-export const routes: RouteObject [] = [
+export const routes: RouteObject[] = [
     {
         path: '/',
         element: <App />,
         children: [
-            {path: '', element: <HomePage /> },
-            {path: 'activities', element: <ActivityDashboard /> },
-            {path: 'activities/:id', element: <ActivityDetails /> },
-            {path: 'createActivity', element: <ActivityForm /> }
+            {path: 'activities', element: <ActivityDashboard />},
+            {path: 'activities/:id', element: <ActivityDetails />},
+            {path: 'createActivity', element: <ActivityForm key='create' />},
+            {path: 'manage/:id', element: <ActivityForm key='manage' />},
         ]
     }
 ]
