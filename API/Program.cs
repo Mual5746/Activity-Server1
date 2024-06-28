@@ -1,4 +1,5 @@
 using Persistence;
+using API.Middleware;
 using Microsoft.EntityFrameworkCore;
 using API.Extensions;
 
@@ -12,6 +13,8 @@ builder.Services.AddAplicationServices(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ExceptionMiddleware>();  //10
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

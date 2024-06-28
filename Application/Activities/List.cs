@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Application.Core;
+using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -8,12 +9,12 @@ namespace Application.Activities
 {
     public class List
     {
-        public class Query : IRequest<List<Activity>> { };
+        public class Query : IRequest<Result<List<Activity>>> { }
 
         //Class handler is going to drive or use the request handler interface from mediator and we
         //pass it the query
 
-        public class Handler : IRequestHandler<Query, List<Activity>>
+        public class Handler : IRequestHandler<Query, Result<List<Activity>>>
         {
             private readonly DataContext _context;
             //private readonly ILogger<List> _logger;
@@ -27,7 +28,8 @@ namespace Application.Activities
                // _logger = logger;
             }
 
-            public async Task<List<Activity>>Handle(Query request, CancellationToken token) // in case to want to use cancelation
+            //public async Task<List<Activity>>Handle(Query request, CancellationToken token) // in case to want to use cancelation
+            public async Task<Result<List<Activity>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 /*
                 try
@@ -44,7 +46,8 @@ namespace Application.Activities
                     _logger.LogInformation($"Task was canceled {ex}" );
 
                 } */
-                return await _context.Activities.ToListAsync();
+                //return await _context.Activities.ToListAsync();
+                return Result<List<Activity>>.Success(await _context.Activities.ToListAsync());
             }
             
         }
