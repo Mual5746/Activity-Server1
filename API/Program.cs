@@ -15,6 +15,7 @@ builder.Services.AddControllers( opt =>
     {
         var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         opt.Filters.Add(new AuthorizeFilter(policy));
+        
     }
 );
 builder.Services.AddAplicationServices(builder.Configuration);
