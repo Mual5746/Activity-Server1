@@ -1,15 +1,12 @@
 ﻿using Application.Activities;
 using Domain;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace API.Controllers
 {
     // [ApiController]
     //[Route("[controller]")]
-    [AllowAnonymous]
+    //[AllowAnonymous]
     public class ActivitiesController : BaseApiController
     { 
         //this service been created in BaseApiController 
@@ -49,7 +46,7 @@ namespace API.Controllers
         {
             //return Ok(await Mediator.Send(new Create.Command { Aktivity = activity}));
             //10
-            return HandleResult(await Mediator.Send(new Create.Command { Aktivity = activity }));
+            return HandleResult(await Mediator.Send(new Create.Command { Activity = activity }));
         }
        
         [HttpPut("{id}")]

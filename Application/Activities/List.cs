@@ -1,4 +1,5 @@
 ﻿using Application.Core;
+using AutoMapper;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -9,45 +10,34 @@ namespace Application.Activities
 {
     public class List
     {
-        public class Query : IRequest<Result<List<Activity>>> { }
+        public class Query : IRequest<Result<List<ActivityDto>>> { }
 
         //Class handler is going to drive or use the request handler interface from mediator and we
         //pass it the query
 
-        public class Handler : IRequestHandler<Query, Result<List<Activity>>>
+        public class Handler : IRequestHandler<Query, Result<List<ActivityDto>>>
         {
             private readonly DataContext _context;
-            //private readonly ILogger<List> _logger;
+            public readonly IMapper _mapper;
 
-            //We need access to our data context.If we want to return a list of activities, then we need
-            //to get them from our database.  So we're going to inject our DB context or our data context into
-            //here, but it's not going to be a public
-            public Handler(DataContext context ) //, ILogger<List> logger) 
+            
+            public Handler(DataContext context, IMapper mapper ) 
             {
+                _mapper = mapper;
                 _context = context;
-               // _logger = logger;
             }
 
             //public async Task<List<Activity>>Handle(Query request, CancellationToken token) // in case to want to use cancelation
-            public async Task<Result<List<Activity>>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<ActivityDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                /*
-                try
-                {
-                    for (var i = 0; i < 10; i++)
-                    {
-                        token.ThrowIfCancellationRequested();
-                        await Task.Delay(1000, token);
-                        _logger.LogInformation($"Task {i} has been completed ");
-                    }
+               var activities = await _context.Activities
+               .Include( a => a.Attendees)
+               .ThenInclude( u => u.AppUser)
+               .ToListAsync();
 
-                } catch(Exception ex)
-                {
-                    _logger.LogInformation($"Task was canceled {ex}" );
-
-                } */
+               var activitiesToReturn = _mapper.Map<List<ActivityDto>>(activities);
                 //return await _context.Activities.ToListAsync();
-                return Result<List<Activity>>.Success(await _context.Activities.ToListAsync());
+                return Result<List<ActivityDto>>.Success(activitiesToReturn);
             }
             
         }
