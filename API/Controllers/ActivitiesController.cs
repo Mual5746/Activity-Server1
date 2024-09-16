@@ -9,6 +9,7 @@ namespace API.Controllers
 {
     // [ApiController]
     //[Route("[controller]")]
+    [AllowAnonymous]
     public class ActivitiesController : BaseApiController
     { 
         //this service been created in BaseApiController 
