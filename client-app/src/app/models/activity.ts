@@ -1,4 +1,5 @@
 import { Profile } from "./profile";
+
 export interface Activity {
     id: string;
     title: string;
