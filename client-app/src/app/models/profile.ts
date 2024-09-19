@@ -1,5 +1,7 @@
 import { User } from "./user";
-export interface Profile {
+
+
+export interface IProfile {
     username: string;
     displayName: string;
     image?: string;
@@ -8,10 +10,17 @@ export interface Profile {
     isCancelled?: boolean;
     attendees?: Profile[]
 }
-export class Profile implements Profile {
+
+//added this class 
+export class Profile implements IProfile {
     constructor(user: User) {
         this.username = user.username;
         this.displayName = user.displayName;
         this.image = user.image
     }
+
+    username: string;
+    displayName: string;
+    image?: string;
+    bio?: string;
 }
