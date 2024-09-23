@@ -26,6 +26,6 @@ export class Profile implements IProfile {
 
 export interface Photo {
     id : string;
-    ulr : string;
+    url : string;
     isMain: boolean;
 }
