@@ -6,9 +6,7 @@ export interface IProfile {
     displayName: string;
     image?: string;
     bio?: string;
-    hostUsername?: string;
-    isCancelled?: boolean;
-    attendees?: Profile[]
+    photos?: Photo[]
 }
 
 //added this class 
@@ -23,4 +21,11 @@ export class Profile implements IProfile {
     displayName: string;
     image?: string;
     bio?: string;
+    photos?: Photo[]
+}
+
+export interface Photo {
+    id : string;
+    ulr : string;
+    isMain: boolean;
 }
