@@ -2,6 +2,7 @@
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Application.Core;
 
 namespace API.Controllers
 {
@@ -24,12 +25,12 @@ namespace API.Controllers
         */
         [HttpGet] //api/activities
         //[Route("[api/activities]")]S
-        public async Task<ActionResult<List<Activity>>> GetActivities()
+        public async Task<ActionResult<List<Activity>>> GetActivities([FromQuery] PagingParams param)
         {
             // return await _context.Activities.ToListAsync();
             //return await Mediator.Send(new List.Query());
             //10
-            return HandleResult(await Mediator.Send(new List.Query()));
+            return HandleResult(await Mediator.Send(new List.Query{ Params = param }));
         }   
         [HttpGet("{id}")] //api/activities/fdfkdffdfd
         //[Route("[api/activities]")]
