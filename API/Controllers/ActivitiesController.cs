@@ -27,10 +27,8 @@ namespace API.Controllers
         //[Route("[api/activities]")]S
         public async Task<ActionResult<List<Activity>>> GetActivities([FromQuery] PagingParams param)
         {
-            // return await _context.Activities.ToListAsync();
-            //return await Mediator.Send(new List.Query());
-            //10
-            return HandleResult(await Mediator.Send(new List.Query{ Params = param }));
+            
+            return HandlePagedResult(await Mediator.Send(new List.Query{ Params = param }));
         }   
         [HttpGet("{id}")] //api/activities/fdfkdffdfd
         //[Route("[api/activities]")]
