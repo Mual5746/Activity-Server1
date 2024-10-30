@@ -7,8 +7,7 @@ using Infrastructure.Photos;
 using Infrastructure.Security;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Persistence;
-
+using Persistence; 
 namespace API.Extensions
 {
     public static class ApplicationServiceExtensions
@@ -21,7 +20,7 @@ namespace API.Extensions
             services.AddSwaggerGen();
             services.AddDbContext<DataContext>(opt =>
             {
-                opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
+                opt.UseSqlServer(config.GetConnectionString("DefaultConnection"));
             });
 
             services.AddCors(opt =>

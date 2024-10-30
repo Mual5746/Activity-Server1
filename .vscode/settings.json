@@ -1,1 +1,4 @@
-{}
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/757a3452-7370-418f-b2a3-ce8c8e5d2922/resourceGroups/Reactivity-group/providers/Microsoft.Web/sites/Smartactivity",
+    "appService.deploySubpath": "API/bin/Publish"
+}
